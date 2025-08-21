@@ -5,7 +5,7 @@ app = FastAPI()
 
 @app.get("/")
 async def root():
-    return {"message": "Hello World"}
+    return {"odeio viver"}
 
 @app.get("/suicidio")
 async def teste():
