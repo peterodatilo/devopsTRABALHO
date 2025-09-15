@@ -5,8 +5,8 @@ app = FastAPI()
 
 @app.get("/")
 async def root():
-    return {"odeio viver"}
+    return {"teste"}
 
-@app.get("/suicidio")
+@app.get("/deps")
 async def teste():
-    return {"vou me matar domingo"}
+    return {"tenho ansiedade"}
