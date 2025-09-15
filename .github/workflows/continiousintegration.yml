@@ -1,17 +1,33 @@
-name: CD
+name: Continuous Integration
+
 on:
   pull_request:
     branches:
       - main
 
 jobs:
-  Explore-GitHub-Actions:
+  lint-and-test:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Check out repository code
+      - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Python Lint Code Scanning Action
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+      - name: Run pylint (code scanning)
         uses: advanced-security/python-lint-code-scanning-action@v1.1.2
         with:
-         linter: pylint
+          linter: pylint
+
+      - name: Run tests
+        run: |
+          if [ -f pytest.ini ] || [ -d tests ] ; then pytest -q; else echo "Nenhum teste detectado — OK"; fi
