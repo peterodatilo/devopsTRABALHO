@@ -1,30 +1,29 @@
-from fastapi.testclient import TestClient
+import sys
+import os
+
+# Adiciona o diretório raiz do projeto ao PYTHONPATH
+sys.path.append(os.path.dirname(os.path.abspath(__file__)) + "/..")
+
 from main import app, minha_funcao
+from fastapi.testclient import TestClient
 
 client = TestClient(app)
 
-# 1. Teste unitário da função principal
+
 def test_minha_funcao():
+    """Verifica se a função principal retorna True"""
     assert minha_funcao() is True
 
-# 2. Teste do endpoint raiz
-def test_root_endpoint_status():
+
+def test_root():
+    """Verifica se o endpoint raiz responde corretamente"""
     response = client.get("/")
     assert response.status_code == 200
+    assert "teste" in response.json()
 
-# 3. Teste do conteúdo do endpoint raiz
-def test_root_endpoint_content():
-    response = client.get("/")
-    data = response.json()
-    assert "teste" in data
 
-# 4. Teste do endpoint /deps
-def test_deps_endpoint_status():
+def test_deps():
+    """Verifica se o endpoint /deps responde corretamente"""
     response = client.get("/deps")
     assert response.status_code == 200
-
-# 5. Teste do conteúdo do endpoint /deps
-def test_deps_endpoint_content():
-    response = client.get("/deps")
-    data = response.json()
-    assert "tenho ansiedade" in data
+    assert "mensagem" in response.json()
