@@ -28,4 +28,3 @@ async def teste():
     Endpoint de exemplo que retorna uma mensagem fixa.
     """
     return {"mensagem": "tenho ansiedade"}
-
