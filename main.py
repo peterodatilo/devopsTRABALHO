@@ -1,3 +1,12 @@
+"""
+Módulo principal da aplicação.
+"""
+
+def minha_funcao():
+    """Executa a lógica principal."""
+    return True
+
+
 from fastapi import FastAPI
 
 app = FastAPI()
