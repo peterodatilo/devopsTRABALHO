@@ -1,21 +1,31 @@
 """
-Módulo principal da aplicação.
+Módulo principal da aplicação FastAPI.
 """
-
-def minha_funcao():
-    """Executa a lógica principal."""
-    return True
-
 
 from fastapi import FastAPI
 
 app = FastAPI()
 
 
+def minha_funcao():
+    """
+    Função de exemplo que retorna True.
+    """
+    return True
+
+
 @app.get("/")
 async def root():
+    """
+    Endpoint raiz da aplicação.
+    """
     return {"teste"}
+
 
 @app.get("/deps")
 async def teste():
-    return {"tenho ansiedade"}
+    """
+    Endpoint de exemplo que retorna uma mensagem fixa.
+    """
+    return {"mensagem": "tenho ansiedade"}
+
