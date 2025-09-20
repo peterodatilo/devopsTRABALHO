@@ -27,3 +27,7 @@ def test_deps():
     response = client.get("/deps")
     assert response.status_code == 200
     assert "mensagem" in response.json()
+
+ def test_fail_example():
+     assert False, "Teste forçado para gerar falha no CI/CD"
+
